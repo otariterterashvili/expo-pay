@@ -1,8 +1,17 @@
-import { registerWebModule, NativeModule } from 'expo';
+import { NativeModule, registerWebModule } from "expo";
 
-import { ExpoPayModuleEvents } from './ExpoPay.types';
+import type {
+  ExpoGooglePayModuleEvents,
+  GooglePayEnvironment,
+} from "./ExpoPay.types";
 
-// ExpoPayModule is not available on the web platform.
-class ExpoPayModule extends NativeModule<ExpoPayModuleEvents> {}
+class ExpoGooglePayModule extends NativeModule<ExpoGooglePayModuleEvents> {
+  isReadyToPayAsync(
+    _requestJson: string,
+    _environment?: GooglePayEnvironment,
+  ): Promise<boolean> {
+    return Promise.resolve(false);
+  }
+}
 
-export default registerWebModule(ExpoPayModule, 'ExpoPayModule');
+export default registerWebModule(ExpoGooglePayModule, "ExpoGooglePay");

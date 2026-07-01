@@ -1,9 +1,20 @@
 {
   "name": "expo-pay",
   "version": "0.1.1",
-  "description": "My new module",
+  "description": "Expo native module for Android Google Pay payment buttons and payment sheets.",
   "main": "build/index.js",
   "types": "build/index.d.ts",
+  "files": [
+    "android/build.gradle",
+    "android/src/main/AndroidManifest.xml",
+    "android/src/main/java",
+    "build",
+    "src/*.ts",
+    "src/*.tsx",
+    "expo-module.config.json",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "build": "node internal/module_scripts/build.js",
     "clean": "node internal/module_scripts/clean.js",
@@ -14,10 +25,14 @@
     "open:android": "node internal/module_scripts/open-android.js"
   },
   "keywords": [
+    "android",
+    "google-pay",
+    "google-pay-button",
+    "payments",
     "react-native",
     "expo",
-    "expo-pay",
-    "ExpoPay"
+    "expo-module",
+    "expo-pay"
   ],
   "repository": "https://github.com/otariterterashvili/expo-pay",
   "bugs": {
@@ -42,9 +57,26 @@
     "typescript": "^5.9.2"
   },
   "jest": {
-    "preset": "jest-expo",
+    "testEnvironment": "node",
     "roots": [
       "<rootDir>/src"
+    ],
+    "transform": {
+      "^.+\\.[jt]sx?$": [
+        "babel-jest",
+        {
+          "presets": [
+            "babel-preset-expo"
+          ]
+        }
+      ]
+    },
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json"
     ]
   },
   "peerDependencies": {

@@ -1,5 +1,13 @@
-// Reexport the native module. On web, it will be resolved to ExpoPayModule.web.ts
-// and on native platforms to ExpoPayModule.ts
-export { default } from './ExpoPayModule';
-export { default as ExpoPayView } from './ExpoPayView';
-export * from './ExpoPay.types';
+export type {
+  ExpoGooglePayViewProps,
+  GooglePayButtonRef,
+  GooglePayButtonTheme,
+  GooglePayButtonType,
+  GooglePayEnvironment,
+  GooglePayErrorEvent,
+  GooglePayJson,
+  GooglePayReadyToPayChangedEvent,
+  GooglePayTokenReceivedEvent,
+} from "./ExpoPay.types";
+export { isReadyToPayAsync } from "./GooglePay";
+export { default, default as GooglePayButton } from "./ExpoPayView";

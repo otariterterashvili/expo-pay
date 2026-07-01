@@ -3,16 +3,20 @@ plugins {
   id 'expo-module-gradle-plugin'
 }
 
-group = 'expo.modules.pay'
-version = '0.1.0'
+group = 'expo.modules.googlepay'
+version = '0.1.1'
 
 android {
-  namespace "expo.modules.pay"
+  namespace "expo.modules.googlepay"
   defaultConfig {
     versionCode 1
-    versionName "0.1.0"
+    versionName "0.1.1"
   }
   lintOptions {
     abortOnError false
   }
+}
+
+dependencies {
+  implementation "com.google.android.gms:play-services-wallet:20.0.0"
 }

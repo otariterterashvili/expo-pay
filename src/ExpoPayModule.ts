@@ -1,11 +1,23 @@
-import { NativeModule, requireNativeModule } from 'expo';
+import { requireOptionalNativeModule, type NativeModule } from "expo";
 
-import { ExpoPayModuleEvents } from './ExpoPay.types';
+import type {
+  ExpoGooglePayModuleEvents,
+  GooglePayEnvironment,
+} from "./ExpoPay.types";
 
-declare class ExpoPayModule extends NativeModule<ExpoPayModuleEvents> {
-  PI: number;
-  hello(): string;
-  setValueAsync(value: string): Promise<void>;
-}
+export type ExpoGooglePayNativeModule =
+  NativeModule<ExpoGooglePayModuleEvents> & {
+    isReadyToPayAsync(
+      requestJson: string,
+      environment?: GooglePayEnvironment,
+    ): Promise<boolean>;
+  };
 
-export default requireNativeModule<ExpoPayModule>('ExpoPay');
+const ExpoGooglePayModule =
+  requireOptionalNativeModule<ExpoGooglePayNativeModule>("ExpoGooglePay");
+
+const ExpoGooglePayModuleFallback = {
+  isReadyToPayAsync: () => Promise.resolve(false),
+} as unknown as ExpoGooglePayNativeModule;
+
+export default ExpoGooglePayModule ?? ExpoGooglePayModuleFallback;
